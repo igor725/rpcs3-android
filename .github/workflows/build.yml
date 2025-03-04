@@ -81,4 +81,4 @@ jobs:
         # body: 'Some release text body if needed'
         # body_path: or/as/file.md
         files: |
-          app/build/outputs/apk/release/app-release.apk
+          app/build/outputs/apk/release/rpcs3-release.apk
