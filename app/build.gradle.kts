@@ -19,7 +19,7 @@ android {
 
 				externalNativeBuild {
 					cmake {
-						arguments += listOf("-DCMAKE_C_COMPILER_LAUNCHER=ccache", "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache", "-DCMAKE_JOB_POOL_COMPILE:STRING=compile", "-DCMAKE_JOB_POOL_LINK:STRING=link", "'-DCMAKE_JOB_POOLS:STRING=compile=3;link=2'")
+						arguments += listOf("-DCMAKE_C_COMPILER_LAUNCHER=ccache", "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache", "-DCMAKE_BUILD_PARALLEL_LEVEL=3")
 					}
 				}
 
