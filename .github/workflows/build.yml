@@ -13,6 +13,7 @@ on:
         default: true
       releasetag:
         description: Enter the tag name
+        required: true
         type: string
       releasetype:
         description: Make it prerelease
@@ -79,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'workflow_dispatch' && input.publishrelease == 'false' }}
       with:
-        name: rpcs3-build
+        name: rpcs3-build-${{ inputs.releasetag }}
         path: |
           app/build/outputs/apk/release/*
 
