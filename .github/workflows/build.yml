@@ -7,6 +7,10 @@ name: Java CI with Gradle
 on:
   workflow_dispatch:
     inputs:
+      publishrelease:
+        description: Publish as release
+        type: boolean
+        default: true
       releasetag:
         description: Enter the tag name
         type: string
@@ -37,6 +41,10 @@ jobs:
           remove-haskell: 'true'
           remove-codeql: 'true'
           remove-docker-images: 'true'
+
+    - run: sudo apt update
+    - name: Setup ccache
+      uses: hendrikmuhs/ccache-action@v1.2
 
     - name: Checkout repo
       uses: actions/checkout@v4
@@ -69,7 +77,7 @@ jobs:
 
     - name: Build release artifacts
       uses: actions/upload-artifact@v4
-      if: ${{ github.event_name != 'workflow_dispatch' }}
+      if: ${{ github.event_name != 'workflow_dispatch' && input.publishrelease == 'false' }}
       with:
         name: rpcs3-build
         path: |
@@ -77,7 +85,7 @@ jobs:
 
     - name: Create release
       uses: softprops/action-gh-release@v2
-      if: ${{ github.event_name == 'workflow_dispatch' }}
+      if: ${{ github.event_name == 'workflow_dispatch' && input.publishrelease == 'true' }}
       with:
         prerelease: ${{ inputs.releasetype }}
         tag_name: ${{ inputs.releasetag }}

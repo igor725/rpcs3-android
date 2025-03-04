@@ -17,6 +17,12 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+				externalNativeBuild {
+					cmake {
+						arguments += listOf("-DCMAKE_C_COMPILER_LAUNCHER=ccache", "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache")
+					}
+				}
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters += listOf("arm64-v8a" /*, "x86_64" */)
