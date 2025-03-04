@@ -78,7 +78,7 @@ jobs:
 
     - name: Build release artifacts
       uses: actions/upload-artifact@v4
-      if: ${{ github.event_name != 'workflow_dispatch' && input.publishrelease == 'false' }}
+      if: ${{ github.event_name != 'workflow_dispatch' && inputs.publishrelease == 'false' }}
       with:
         name: rpcs3-build-${{ inputs.releasetag }}
         path: |
@@ -86,7 +86,7 @@ jobs:
 
     - name: Create release
       uses: softprops/action-gh-release@v2
-      if: ${{ github.event_name == 'workflow_dispatch' && input.publishrelease == 'true' }}
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.publishrelease == 'true' }}
       with:
         prerelease: ${{ inputs.releasetype }}
         tag_name: ${{ inputs.releasetag }}
